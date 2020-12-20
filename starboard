@@ -1,12 +1,10 @@
-
-
 {{/*
 	This command allows users to flag messages by reacting with a custom emoji.
 
 	Recommended trigger: Reaction trigger on REACTION ADD only.
 */}}
 
-{{/* CONFIGURATION VARIABLES START */}}
+{{/* CONFIGURATION */}}
 {{ $boosterEmoji := "🌸" }} {{/* ID of emoji */}}
 {{ $starChannel := 748708955500445737 }}
 {{/* CONFIGURATION VARIABLES END */}}
