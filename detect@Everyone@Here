@@ -1,0 +1,11 @@
+{{/*  Send a message and then self detructs after x seconds if a user is not allowed to use @everyone or @here 
+ 
+	Recommended trigger: Regex trigger with trigger   (\A|\b|\s)((?:@)everyone|here)(\z|\b|\s)
+*/}}
+{{$time := 3}} 
+{{$x :=sendMessageRetID nil (complexMessage "content" .User.Mention "embed" (cembed
+		"description" (print "You cannot use @everyone or @here. ")
+		"color" 3092790 )
+) }}
+{{deleteMessage nil $x $time}}
+{{deleteTrigger 0}}
