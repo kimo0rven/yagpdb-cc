@@ -1,0 +1,18 @@
+{{/* Set to 0 for a per user cooldown, set to 1 to make the cooldown global. */}}
+{{$global := 1}}
+ 
+{{/* Name of the database entry, good for multiple commands that use cooldowns. */}}
+{{$amongUs := "amongUsCooldown"}}
+ 
+{{/* Length of the cooldown in seconds. */}}
+{{$length := 300}}
+ 
+{{/* Whether or not to announce when the command is on cooldown 1 for yes 0 for no */}}
+{{$announce := 1}}
+ 
+ 
+{{if eq $global 0}}{{$global = .User.ID}}{{else}}{{$global = (toInt64 0)}}{{end}}{{if (dbGet $global $amongUs)}}{{if eq $announce 1}}<a:finger_waggle:782086048183222293> This command is still on cooldown for: **{{humanizeDurationSeconds ((dbGet $global $amongUs).ExpiresAt.Sub currentTime)}}**{{deleteResponse 5}}.{{end}}{{else}}{{dbSetExpire $global $amongUs "amongUsCooldown" $length}}
+ 
+{{mentionRoleID 753191690751443049}} • {{.User.Username}} wants to play!
+➥{{.StrippedMsg}}
+{{end}}
